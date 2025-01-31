@@ -4,11 +4,11 @@ import React from "react";
 import EmployeeComponent from "./component/EmployeeComponent";
 
 function App() {
-  return (
-    <div className="App">
-      <EmployeeComponent />
-    </div>
-  );
+    return (
+        <div className="container">
+            <EmployeeComponent />
+        </div>
+    );
 }
 
 export default App;
