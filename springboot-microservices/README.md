@@ -279,7 +279,7 @@ spring.cloud.gateway.globalcors.corsConfigurations.[/**].allowedMethods=GET,POST
     ``` 
     docker run --rm -it --name zipkin -p 9411:9411 openzipkin/zipkin
     ```
-    or if it is installed as a jar file inside the project folder
+    or if it is installed as a jar file inside of the project folder
     ``` 
     java -jar zipkin-server-versionnumber-exec.jar
     ```
@@ -351,21 +351,21 @@ Additional custom styles can be placed in `App.css` or other related CSS files.
 
 ## **How to Run the Application**
 1. **Navigate to the Front-End Project Folder**
-``` bash
-   cd react-front-end
-```
-1. **Install Dependencies**
-``` bash
-   npm install
-```
-1. **Run the Application**
-``` bash
-   npm start
-```
-1. Open the app in your browser at:
-``` 
-   http://localhost:3000
-```
+    ``` bash
+    cd react-front-end
+    ```
+2. **Install Dependencies**
+    ``` bash
+    npm install
+    ```
+3. **Run the Application**
+    ``` bash
+    npm start
+    ```
+4. Open the app in your browser at:
+    ``` 
+    http://localhost:3000
+    ```
 
 ## **Testing**
 Run the available front-end tests using:
