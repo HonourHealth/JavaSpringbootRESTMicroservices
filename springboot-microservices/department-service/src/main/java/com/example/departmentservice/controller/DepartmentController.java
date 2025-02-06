@@ -26,5 +26,4 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentByCode);
     }
 
-
 }
