@@ -284,6 +284,11 @@ spring.cloud.gateway.globalcors.corsConfigurations.[/**].allowedMethods=GET,POST
     java -jar zipkin-server-versionnumber-exec.jar
     ```
 
+## **Back-End Testing**
+Unit tests can be run through:
+- Your IDE's test runner (Right-click on the test file/folder and select 'Run Tests')
+- Or using Maven command
+
 # **React Front-End**
 This project is a React-based front-end application that interacts with the microservices architecture through an API Gateway. It handles employee, department, and organization management using modern UI practices.
 ## **Prerequisites**
@@ -367,8 +372,12 @@ Additional custom styles can be placed in `App.css` or other related CSS files.
     http://localhost:3000
     ```
 
-## **Testing**
-Run the available front-end tests using:
+## **Front-End Testing**
+Run the available front-end tests with coverage using:
 ```bash
-npm test
+npm run test:coverage
 ```
+
+Coverage reports can be found at:
+
+- coverage/lcov-report/index.html
