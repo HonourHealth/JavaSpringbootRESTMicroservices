@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class MessageController {
-    private RabbitMQProducer producer;
 
+    private RabbitMQProducer producer;
+    
     @GetMapping("/publish")
     public ResponseEntity<String> sendMessage(@RequestParam("message") String message) {
         producer.sendMessage(message);
