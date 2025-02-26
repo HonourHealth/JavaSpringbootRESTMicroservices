@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>employee-management-system</artifactId>
+	<artifactId>springboot-fullstack-employee-management-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>employee-management-system</name>
 	<description>Demo project for Spring Boot Employee Management System</description>
