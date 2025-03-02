@@ -11,9 +11,9 @@ export const listEmployees = async () => {
     }
 };
 
-export const getEmployee = async (id) => {
+export const getEmployee = async (employeeId) => {
     try {
-        const response = await axios.get(`${REST_API_BASE_URL}/${id}`);
+        const response = await axios.get(`${REST_API_BASE_URL}/${employeeId}`);
         return response;
     } catch (error) {
         return error;
@@ -29,9 +29,9 @@ export const createEmployee = async (employee) => {
     }
 };
 
-export const updateEmployee = async (id, employee) => {
+export const updateEmployee = async (employeeId, employee) => {
     try {
-        const response = await axios.put(`${REST_API_BASE_URL}/${id}`, employee);
+        const response = await axios.put(`${REST_API_BASE_URL}/${employeeId}`, employee);
         return response;
     } catch (error) {
         return error;

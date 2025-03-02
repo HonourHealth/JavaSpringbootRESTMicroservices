@@ -22,6 +22,10 @@ function App() {
                         path="/add-employee"
                         element={<EmployeeComponent />}>
                     </Route>
+                    <Route 
+                        path="/edit-employee/:id"
+                        element={<EmployeeComponent />}>
+                    </Route>
                 </Routes>
                 <FooterComponent />
             </BrowserRouter>
