@@ -45,12 +45,12 @@ const EmployeeComponent = () => {
                 email,
             };
 
-            console.log("Employee => " + JSON.stringify(employee));
+            //console.log("Employee => " + JSON.stringify(employee));
 
             if (id) {
                 updateEmployee(id, employee)
                     .then((response) => {
-                        console.log(response.data);
+                        //console.log(response.data);
                         navigate("/employees");
                     })
                     .catch((error) => {
@@ -59,7 +59,7 @@ const EmployeeComponent = () => {
             } else {
                 createEmployee(employee)
                     .then((response) => {
-                        console.log(response.data);
+                        //console.log(response.data);
                         navigate("/employees");
                     })
                     .catch((error) => {
@@ -206,6 +206,7 @@ const EmployeeComponent = () => {
                                 <button
                                     className="btn btn-danger"
                                     onClick={goBack}
+                                    type="button"
                                     style={{ marginLeft: "10px" }}
                                 >
                                     Back
