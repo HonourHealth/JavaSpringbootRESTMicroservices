@@ -11,3 +11,28 @@ export const getAllDepartments = async () => {
         throw error;
     }
 };
+
+export const createDepartment = async (department) => {
+    try {
+        const response = await axios.post(
+            DEPARTMENT_REST_API_BASE_URL,
+            department
+        );
+        return response;
+    } catch (error) {
+        console.error("Error creating department:", error);
+        throw error;
+    }
+};
+
+export const getDepartmentById = async (departmentId) => {
+    try {
+        const response = await axios.get(
+            `${DEPARTMENT_REST_API_BASE_URL}/${departmentId}`
+        );
+        return response;
+    } catch (error) {
+        console.error("Error fetching department:", error);
+        throw error;
+    }
+};
