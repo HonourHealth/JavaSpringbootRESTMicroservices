@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
     createDepartment,
+    updateDepartment,
     getDepartmentById,
 } from "../services/DepartmentService";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,29 +15,40 @@ const DepartmentComponent = () => {
     const navigator = useNavigate();
 
     useEffect(() => {
-        getDepartmentById(id).then((response) => {
-            setDepartmentName(response.data.departmentName);
-            setDepartmentDescription(response.data.departmentDescription);
-        }).catch((error) => {
-            console.error("Error fetching department:", error);
-        });
+        getDepartmentById(id)
+            .then((response) => {
+                setDepartmentName(response.data.departmentName);
+                setDepartmentDescription(response.data.departmentDescription);
+            })
+            .catch((error) => {
+                console.error("Error fetching department:", error);
+            });
     }, [id]);
 
-    function saveDepartment(e) {
+    function saveOrUpdateDepartment(e) {
         e.preventDefault();
         const department = {
             departmentName,
             departmentDescription,
         };
 
-        createDepartment(department)
-            .then((response) => {
-                console.log(response.data);
-                navigator("/departments");
-            })
-            .catch((error) => {
-                console.error("Error creating department:", error);
-            });
+        if (id) {
+            updateDepartment(id, department)
+                .then((response) => {
+                    navigator("/departments");
+                })
+                .catch((error) => {
+                    console.error("Error updating department:", error);
+                });
+        } else {
+            createDepartment(department)
+                .then((response) => {
+                    navigator("/departments");
+                })
+                .catch((error) => {
+                    console.error("Error creating department:", error);
+                });
+        }
     }
 
     function pageTitle() {
@@ -96,7 +108,7 @@ const DepartmentComponent = () => {
                                 />
                             </div>
                             <button
-                                onClick={(e) => saveDepartment(e)}
+                                onClick={(e) => saveOrUpdateDepartment(e)}
                                 className="btn btn-success"
                                 type="submit"
                             >

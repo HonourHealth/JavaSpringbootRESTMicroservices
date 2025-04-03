@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getAllDepartments } from "../services/DepartmentService";
+import {
+    deleteDepartment,
+    getAllDepartments,
+} from "../services/DepartmentService";
 import { Link, useNavigate } from "react-router-dom";
 
 const ListDepartmentComponent = () => {
@@ -7,6 +10,10 @@ const ListDepartmentComponent = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        listOfDepartments();
+    }, []);
+
+    function listOfDepartments() {
         getAllDepartments()
             .then((response) => {
                 setDepartments(response.data);
@@ -14,10 +21,20 @@ const ListDepartmentComponent = () => {
             .catch((error) => {
                 console.error("Error fetching departments:", error);
             });
-    }, []);
+    }
 
     function updateDepartment(id) {
         navigate(`/edit-department/${id}`);
+    }
+
+    function removeDepartment(id) {
+        deleteDepartment(id)
+            .then((response) => {
+                listOfDepartments();
+            })
+            .catch((error) => {
+                console.error("Error deleting department:", error);
+            });
     }
 
     return (
@@ -41,8 +58,24 @@ const ListDepartmentComponent = () => {
                             <td>{department.id}</td>
                             <td>{department.departmentName}</td>
                             <td>{department.departmentDescription}</td>
-                            <td>
-                                <button onClick={() => updateDepartment(department.id)} className="btn btn-info">Update</button>
+                            <td className="text-center">
+                                <button
+                                    onClick={() =>
+                                        updateDepartment(department.id)
+                                    }
+                                    className="btn btn-info"
+                                >
+                                    Update
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        removeDepartment(department.id)
+                                    }
+                                    className="btn btn-danger"
+                                    style={{ marginLeft: "10px" }}
+                                >
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}

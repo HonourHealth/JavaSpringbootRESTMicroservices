@@ -36,3 +36,28 @@ export const getDepartmentById = async (departmentId) => {
         throw error;
     }
 };
+
+export const updateDepartment = async (departmentId, department) => {
+    try {
+        const response = await axios.put(
+            `${DEPARTMENT_REST_API_BASE_URL}/${departmentId}`,
+            department
+        );
+        return response;
+    } catch (error) {
+        console.error("Error updating department:", error);
+        throw error;
+    }
+};
+
+export const deleteDepartment = async (departmentId) => {
+    try {
+        const response = await axios.delete(
+            `${DEPARTMENT_REST_API_BASE_URL}/${departmentId}`
+        );
+        return response;
+    } catch (error) {
+        console.error("Error deleting department:", error);
+        throw error;
+    }
+};
