@@ -1,6 +1,7 @@
 package com.example.employeemanagementsystem.mapper;
 
 import com.example.employeemanagementsystem.dto.EmployeeDto;
+import com.example.employeemanagementsystem.entity.Department;
 import com.example.employeemanagementsystem.entity.Employee;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,8 @@ class EmployeeMapperTest {
                 1L,
                 "firstName",
                 "lastName",
-                "email@email.com"
+                "email@email.com",
+                new Department(1L, "departmentName", "departmentDescription")
         );
 
         EmployeeDto employeeDto = EmployeeMapper.mapToEmployeeDto(employee);
@@ -23,6 +25,9 @@ class EmployeeMapperTest {
         assertEquals(employee.getFirstName(), employeeDto.getFirstName());
         assertEquals(employee.getLastName(), employeeDto.getLastName());
         assertEquals(employee.getEmail(), employeeDto.getEmail());
+        assertEquals(1L, employee.getDepartment().getId());
+        assertEquals("departmentName", employee.getDepartment().getDepartmentName());
+        assertEquals("departmentDescription", employee.getDepartment().getDepartmentDescription());
     }
 
     @Test
@@ -33,6 +38,7 @@ class EmployeeMapperTest {
         employeeDto.setFirstName("firstName");
         employeeDto.setLastName("lastName");
         employeeDto.setEmail("email@email.com");
+        employeeDto.setDepartmentId(1L);
 
         Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
 

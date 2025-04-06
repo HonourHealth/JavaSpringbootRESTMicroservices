@@ -14,11 +14,13 @@ class EmployeeDtoTest {
         employeeDto.setFirstName("firstName");
         employeeDto.setLastName("lastName");
         employeeDto.setEmail("email@email.com");
+        employeeDto.setDepartmentId(1L);
 
         assertEquals(1L, employeeDto.getId());
         assertEquals("firstName", employeeDto.getFirstName());
         assertEquals("lastName", employeeDto.getLastName());
         assertEquals("email@email.com", employeeDto.getEmail());
+        assertEquals(1L, employeeDto.getDepartmentId());
 
     }
 
@@ -28,13 +30,14 @@ class EmployeeDtoTest {
                 1L,
                 "firstName",
                 "lastName",
-                "email@email.com"
+                "email@email.com",
+                1L
         );
 
         assertEquals(1L, employeeDto.getId());
         assertEquals("firstName", employeeDto.getFirstName());
         assertEquals("lastName", employeeDto.getLastName());
         assertEquals("email@email.com", employeeDto.getEmail());
-
+        assertEquals(1L, employeeDto.getDepartmentId());
     }
 }

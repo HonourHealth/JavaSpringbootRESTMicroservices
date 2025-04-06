@@ -5,11 +5,24 @@ import {
     getEmployee,
     updateEmployee,
 } from "../services/EmployeeService";
+import { getAllDepartments } from "../services/DepartmentService";
 
 const EmployeeComponent = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [departmentId, setDepartmentId] = useState("");
+    const [departments, setDepartments] = useState([]);
+
+    useEffect(() => {
+        getAllDepartments()
+            .then((response) => {
+                setDepartments(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching departments:", error);
+            });
+    }, []);
 
     const navigate = useNavigate();
 
@@ -19,6 +32,7 @@ const EmployeeComponent = () => {
         firstName: "",
         lastName: "",
         email: "",
+        department: "",
     });
 
     useEffect(() => {
@@ -28,6 +42,7 @@ const EmployeeComponent = () => {
                     setFirstName(response.data.firstName);
                     setLastName(response.data.lastName);
                     setEmail(response.data.email);
+                    setDepartmentId(response.data.departmentId);
                 })
                 .catch((error) => {
                     console.error("Error fetching employee:", error);
@@ -43,14 +58,12 @@ const EmployeeComponent = () => {
                 firstName,
                 lastName,
                 email,
+                departmentId,
             };
-
-            //console.log("Employee => " + JSON.stringify(employee));
 
             if (id) {
                 updateEmployee(id, employee)
                     .then((response) => {
-                        //console.log(response.data);
                         navigate("/employees");
                     })
                     .catch((error) => {
@@ -59,7 +72,6 @@ const EmployeeComponent = () => {
             } else {
                 createEmployee(employee)
                     .then((response) => {
-                        //console.log(response.data);
                         navigate("/employees");
                     })
                     .catch((error) => {
@@ -95,6 +107,13 @@ const EmployeeComponent = () => {
             errorsCopy.email = "";
         } else {
             errorsCopy.email = "Email is required";
+            valid = false;
+        }
+
+        if (departmentId) {
+            errorsCopy.department = "";
+        } else {
+            errorsCopy.department = "Selecting department is required";
             valid = false;
         }
 
@@ -196,6 +215,46 @@ const EmployeeComponent = () => {
                                         </div>
                                     )}
                                 </div>
+
+                                <div className="form-group mb-2">
+                                    <label
+                                        className="form-label"
+                                        htmlFor="department"
+                                    >
+                                        Select Department:
+                                    </label>
+                                    <select
+                                        className={`form-control ${
+                                            errors.department
+                                                ? "is-invalid"
+                                                : ""
+                                        }`}
+                                        name="department"
+                                        id="department"
+                                        value={departmentId}
+                                        onChange={(e) =>
+                                            setDepartmentId(e.target.value)
+                                        }
+                                    >
+                                        <option value="Select Department">
+                                            Select Department
+                                        </option>
+                                        {departments.map((department) => (
+                                            <option
+                                                key={department.id}
+                                                value={department.id}
+                                            >
+                                                {department.departmentName}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {errors.department && (
+                                        <div className="invalid-feedback">
+                                            {errors.department}
+                                        </div>
+                                    )}
+                                </div>
+
                                 <button
                                     className="btn btn-success"
                                     type="submit"

@@ -3,6 +3,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 import EmployeeComponent from "../../src/components/EmployeeComponent.jsx";
 import * as EmployeeService from "../../src/services/EmployeeService";
+import * as DepartmentService from "../../src/services/DepartmentService";
 
 jest.mock("react-router-dom", () => ({
     ...jest.requireActual("react-router-dom"),
@@ -15,12 +16,31 @@ jest.mock("../../src/services/EmployeeService", () => ({
     updateEmployee: jest.fn(),
 }));
 
+jest.mock("../../src/services/DepartmentService", () => ({
+    getAllDepartments: jest.fn(),
+}));
+
 describe("EmployeeComponent", () => {
     const mockNavigate = jest.fn();
+    const mockDepartments = [
+        { id: 1, departmentName: "HR" },
+        { id: 2, departmentName: "IT" },
+        { id: 3, departmentName: "Finance" },
+    ];
 
     beforeEach(() => {
         jest.clearAllMocks();
         useNavigate.mockImplementation(() => mockNavigate);
+
+        DepartmentService.getAllDepartments.mockResolvedValue({
+            data: mockDepartments,
+        });
+
+        jest.spyOn(console, "error").mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+        console.error.mockRestore();
     });
 
     test("renders component in create mode and calls createEmployee on submit", async () => {
@@ -37,6 +57,10 @@ describe("EmployeeComponent", () => {
             </MemoryRouter>
         );
 
+        await waitFor(() => {
+            expect(DepartmentService.getAllDepartments).toHaveBeenCalled();
+        });
+
         expect(screen.getByText("Add Employee")).toBeInTheDocument();
 
         const firstNameInput = screen.getByPlaceholderText(
@@ -47,9 +71,12 @@ describe("EmployeeComponent", () => {
         );
         const emailInput = screen.getByPlaceholderText(/Enter Email Address/i);
 
+        const departmentSelect = screen.getByRole("combobox");
+
         fireEvent.change(firstNameInput, { target: { value: "firstName1" } });
         fireEvent.change(lastNameInput, { target: { value: "lastName1" } });
         fireEvent.change(emailInput, { target: { value: "email1@email.com" } });
+        fireEvent.change(departmentSelect, { target: { value: "1" } });
 
         const submitButton = screen.getByRole("button", { name: /Submit/i });
         fireEvent.click(submitButton);
@@ -59,6 +86,7 @@ describe("EmployeeComponent", () => {
                 firstName: "firstName1",
                 lastName: "lastName1",
                 email: "email1@email.com",
+                departmentId: "1",
             });
         });
 
@@ -72,6 +100,7 @@ describe("EmployeeComponent", () => {
                 firstName: "firstName2",
                 lastName: "lastName2",
                 email: "email2@email.com",
+                departmentId: "2",
             },
         });
         EmployeeService.updateEmployee.mockResolvedValue({});
@@ -88,6 +117,11 @@ describe("EmployeeComponent", () => {
         );
 
         await waitFor(() => {
+            expect(DepartmentService.getAllDepartments).toHaveBeenCalled();
+            expect(EmployeeService.getEmployee).toHaveBeenCalledWith("456");
+        });
+
+        await waitFor(() => {
             const firstNameInput = screen.getByPlaceholderText(
                 /Enter Employee First Name/i
             );
@@ -101,7 +135,6 @@ describe("EmployeeComponent", () => {
             expect(lastNameInput).toHaveValue("lastName2");
             expect(emailInput).toHaveValue("email2@email.com");
             expect(screen.getByText("Update Employee")).toBeInTheDocument();
-            expect(EmployeeService.getEmployee).toHaveBeenCalledWith("456");
         });
 
         fireEvent.change(
@@ -110,6 +143,7 @@ describe("EmployeeComponent", () => {
                 target: { value: "firstName3" },
             }
         );
+
         const submitButton = screen.getByRole("button", { name: /Submit/i });
         fireEvent.click(submitButton);
 
@@ -118,6 +152,7 @@ describe("EmployeeComponent", () => {
                 firstName: "firstName3",
                 lastName: "lastName2",
                 email: "email2@email.com",
+                departmentId: "2",
             });
         });
 
@@ -136,6 +171,10 @@ describe("EmployeeComponent", () => {
             </MemoryRouter>
         );
 
+        await waitFor(() => {
+            expect(DepartmentService.getAllDepartments).toHaveBeenCalled();
+        });
+
         const submitButton = screen.getByRole("button", { name: /Submit/i });
         fireEvent.click(submitButton);
 
@@ -147,17 +186,44 @@ describe("EmployeeComponent", () => {
                 screen.getByText("Last name is required")
             ).toBeInTheDocument();
             expect(screen.getByText("Email is required")).toBeInTheDocument();
+            expect(
+                screen.getByText("Selecting department is required")
+            ).toBeInTheDocument();
         });
 
         expect(EmployeeService.createEmployee).not.toHaveBeenCalled();
+    });
+
+    test("handles error when fetching departments", async () => {
+        DepartmentService.getAllDepartments.mockRejectedValue(
+            new Error("Failed to fetch departments")
+        );
+
+        render(
+            <MemoryRouter initialEntries={["/add-employee"]}>
+                <Routes>
+                    <Route
+                        path="/add-employee"
+                        element={<EmployeeComponent />}
+                    />
+                </Routes>
+            </MemoryRouter>
+        );
+
+        await waitFor(() => {
+            expect(console.error).toHaveBeenCalledWith(
+                "Error fetching departments:",
+                expect.any(Error)
+            );
+        });
+
+        expect(screen.getByText("Add Employee")).toBeInTheDocument();
     });
 
     test("handles error when fetching employee data", async () => {
         EmployeeService.getEmployee.mockRejectedValue(
             new Error("Failed to fetch employee")
         );
-
-        jest.spyOn(console, "error").mockImplementation(() => {});
 
         render(
             <MemoryRouter initialEntries={["/edit-employee/456"]}>
@@ -177,16 +243,12 @@ describe("EmployeeComponent", () => {
         await waitFor(() => {
             expect(console.error).toHaveBeenCalled();
         });
-
-        console.error.mockRestore();
     });
 
     test("handles error when creating employee", async () => {
         EmployeeService.createEmployee.mockRejectedValue(
             new Error("Failed to create employee")
         );
-
-        jest.spyOn(console, "error").mockImplementation(() => {});
 
         render(
             <MemoryRouter initialEntries={["/add-employee"]}>
@@ -199,6 +261,10 @@ describe("EmployeeComponent", () => {
             </MemoryRouter>
         );
 
+        await waitFor(() => {
+            expect(DepartmentService.getAllDepartments).toHaveBeenCalled();
+        });
+
         const firstNameInput = screen.getByPlaceholderText(
             /Enter Employee First Name/i
         );
@@ -207,9 +273,12 @@ describe("EmployeeComponent", () => {
         );
         const emailInput = screen.getByPlaceholderText(/Enter Email Address/i);
 
+        const departmentSelect = screen.getByRole("combobox");
+
         fireEvent.change(firstNameInput, { target: { value: "firstName1" } });
         fireEvent.change(lastNameInput, { target: { value: "lastName1" } });
         fireEvent.change(emailInput, { target: { value: "email1@email.com" } });
+        fireEvent.change(departmentSelect, { target: { value: "1" } });
 
         const submitButton = screen.getByRole("button", { name: /Submit/i });
         fireEvent.click(submitButton);
@@ -220,8 +289,6 @@ describe("EmployeeComponent", () => {
         });
 
         expect(mockNavigate).not.toHaveBeenCalled();
-
-        console.error.mockRestore();
     });
 
     test("handles error when updating employee", async () => {
@@ -231,13 +298,12 @@ describe("EmployeeComponent", () => {
                 firstName: "firstName2",
                 lastName: "lastName2",
                 email: "email2@email.com",
+                departmentId: "2",
             },
         });
         EmployeeService.updateEmployee.mockRejectedValue(
             new Error("Failed to update employee")
         );
-
-        jest.spyOn(console, "error").mockImplementation(() => {});
 
         render(
             <MemoryRouter initialEntries={["/edit-employee/456"]}>
@@ -251,6 +317,7 @@ describe("EmployeeComponent", () => {
         );
 
         await waitFor(() => {
+            expect(EmployeeService.getEmployee).toHaveBeenCalledWith("456");
             const firstNameInput = screen.getByPlaceholderText(
                 /Enter Employee First Name/i
             );
@@ -266,11 +333,9 @@ describe("EmployeeComponent", () => {
         });
 
         expect(mockNavigate).not.toHaveBeenCalled();
-
-        console.error.mockRestore();
     });
 
-    test("navigates back to employees list when Back button is clicked", () => {
+    test("navigates back to employees list when Back button is clicked", async () => {
         render(
             <MemoryRouter initialEntries={["/add-employee"]}>
                 <Routes>
@@ -282,16 +347,17 @@ describe("EmployeeComponent", () => {
             </MemoryRouter>
         );
 
-        const backButton = screen.getByText("Back");
+        await waitFor(() => {
+            expect(DepartmentService.getAllDepartments).toHaveBeenCalled();
+        });
 
-        const mockEvent = { preventDefault: jest.fn() };
-
-        fireEvent.click(backButton, mockEvent);
+        const backButton = screen.getByRole("button", { name: /Back/i });
+        fireEvent.click(backButton);
 
         expect(mockNavigate).toHaveBeenCalledWith("/employees");
     });
 
-    test("validates email format", () => {
+    test("validates email format", async () => {
         render(
             <MemoryRouter initialEntries={["/add-employee"]}>
                 <Routes>
@@ -302,6 +368,10 @@ describe("EmployeeComponent", () => {
                 </Routes>
             </MemoryRouter>
         );
+
+        await waitFor(() => {
+            expect(DepartmentService.getAllDepartments).toHaveBeenCalled();
+        });
 
         const firstNameInput = screen.getByPlaceholderText(
             /Enter Employee First Name/i
@@ -321,7 +391,7 @@ describe("EmployeeComponent", () => {
         expect(screen.getByText("Email is required")).toBeInTheDocument();
     });
 
-    test("updates state when form inputs change", () => {
+    test("updates state when form inputs change", async () => {
         render(
             <MemoryRouter initialEntries={["/add-employee"]}>
                 <Routes>
@@ -332,6 +402,10 @@ describe("EmployeeComponent", () => {
                 </Routes>
             </MemoryRouter>
         );
+
+        await waitFor(() => {
+            expect(DepartmentService.getAllDepartments).toHaveBeenCalled();
+        });
 
         const firstNameInput = screen.getByPlaceholderText(
             /Enter Employee First Name/i
@@ -350,7 +424,7 @@ describe("EmployeeComponent", () => {
         expect(emailInput).toHaveValue("john@example.com");
     });
 
-    test("displays correct page title based on mode", () => {
+    test("displays correct page title based on mode", async () => {
         const { unmount } = render(
             <MemoryRouter initialEntries={["/add-employee"]}>
                 <Routes>
@@ -361,6 +435,10 @@ describe("EmployeeComponent", () => {
                 </Routes>
             </MemoryRouter>
         );
+
+        await waitFor(() => {
+            expect(DepartmentService.getAllDepartments).toHaveBeenCalled();
+        });
 
         expect(screen.getByText("Add Employee")).toBeInTheDocument();
 
@@ -377,6 +455,8 @@ describe("EmployeeComponent", () => {
             </MemoryRouter>
         );
 
-        expect(screen.getByText("Update Employee")).toBeInTheDocument();
+        await waitFor(() => {
+            expect(screen.getByText("Update Employee")).toBeInTheDocument();
+        });
     });
 });

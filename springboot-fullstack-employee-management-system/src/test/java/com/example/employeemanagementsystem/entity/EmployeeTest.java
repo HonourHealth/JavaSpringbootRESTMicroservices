@@ -15,11 +15,15 @@ class EmployeeTest {
         employee.setFirstName("firstName");
         employee.setLastName("lastName");
         employee.setEmail("email@email.com");
+        employee.setDepartment(new Department(1L, "departmentName1", "departmentDescription1"));
 
         assertEquals(1L, employee.getId());
         assertEquals("firstName", employee.getFirstName());
         assertEquals("lastName", employee.getLastName());
         assertEquals("email@email.com", employee.getEmail());
+        assertEquals(1L, employee.getDepartment().getId());
+        assertEquals("departmentName1", employee.getDepartment().getDepartmentName());
+        assertEquals("departmentDescription1", employee.getDepartment().getDepartmentDescription());
 
     }
 
@@ -31,6 +35,7 @@ class EmployeeTest {
         assertNull(employee.getFirstName());
         assertNull(employee.getLastName());
         assertNull(employee.getEmail());
+        assertNull(employee.getDepartment());
     }
 
     @Test
@@ -39,13 +44,14 @@ class EmployeeTest {
                 1L,
                 "firstName",
                 "lastName",
-                "email@email.com"
+                "email@email.com",
+                new Department(1L, "departmentName", "departmentDescription")
         );
 
         assertEquals(1L, employee.getId());
         assertEquals("firstName", employee.getFirstName());
         assertEquals("lastName", employee.getLastName());
         assertEquals("email@email.com", employee.getEmail());
-
+        assertEquals(1L, employee.getDepartment().getId());
     }
 }
