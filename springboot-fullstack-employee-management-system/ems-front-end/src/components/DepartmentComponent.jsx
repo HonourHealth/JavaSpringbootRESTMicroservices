@@ -59,6 +59,10 @@ const DepartmentComponent = () => {
         }
     }
 
+    function goBack() {
+        navigator("/departments");
+    }
+
     return (
         <div className="container">
             <br />
@@ -113,6 +117,14 @@ const DepartmentComponent = () => {
                                 type="submit"
                             >
                                 Submit
+                            </button>
+                            <button
+                                className="btn btn-danger"
+                                onClick={goBack}
+                                type="button"
+                                style={{ marginLeft: "10px" }}
+                            >
+                                Back
                             </button>
                         </form>
                     </div>
