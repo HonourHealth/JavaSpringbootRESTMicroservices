@@ -1,5 +1,7 @@
 package com.example.user.service.handler;
 
+import com.example.user.StockTradeRequest;
+import com.example.user.StockTradeResponse;
 import com.example.user.UserInformation;
 import com.example.user.UserInformationRequest;
 import com.example.user.entity.PortfolioItem;
