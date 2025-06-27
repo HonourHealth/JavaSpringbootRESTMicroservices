@@ -3,6 +3,7 @@ package com.example.user.service.handler;
 import com.example.common.Ticker;
 import com.example.user.StockTradeRequest;
 import com.example.user.StockTradeResponse;
+import com.example.user.entity.PortfolioItem;
 import com.example.user.entity.User;
 import com.example.user.exceptions.InsufficientBalanceException;
 import com.example.user.exceptions.UnknownTickerException;
@@ -34,6 +35,23 @@ public class StockTradeRequestHandler {
                         portfolioItem -> portfolioItem.setQuantity(portfolioItem.getQuantity() + stockTradeRequest.getQuantity()),
                         () -> this.portfolioItemRepository.save(EntityMessageMapper.toPortfolioItem(stockTradeRequest))
                 );
+        return EntityMessageMapper.toStockTradeResponse(stockTradeRequest, user.getBalance());
+    }
+
+    @Transactional
+    public StockTradeResponse sellStock(StockTradeRequest stockTradeRequest) {
+        this.validateTicker(stockTradeRequest.getTicker());
+        User user = this.userRepository.findById(stockTradeRequest.getUserId())
+                .orElseThrow(() -> new UnknownUserException(stockTradeRequest.getUserId()));
+
+        PortfolioItem portfolioItem = this.portfolioItemRepository.findByUserIdAndTicker(user.getId(), stockTradeRequest.getTicker())
+                .filter(pi -> pi.getQuantity() >= stockTradeRequest.getQuantity())
+                .orElseThrow(() -> new InsufficientBalanceException(user.getId()));
+
+
+        var totalPrice = stockTradeRequest.getPrice() * stockTradeRequest.getQuantity();
+        user.setBalance(user.getBalance() + totalPrice);
+        portfolioItem.setQuantity(portfolioItem.getQuantity() - stockTradeRequest.getQuantity());
         return EntityMessageMapper.toStockTradeResponse(stockTradeRequest, user.getBalance());
     }
 
