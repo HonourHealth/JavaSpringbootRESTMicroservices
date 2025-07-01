@@ -93,4 +93,33 @@ class UserServiceTest {
 
         Assertions.assertEquals(Status.Code.FAILED_PRECONDITION, statusRuntimeException.getStatus().getCode());
     }
+
+    @Test
+    void buySellTest() {
+        var buyRequest = StockTradeRequest.newBuilder()
+                .setUserId(2)
+                .setTicker(Ticker.AMAZON)
+                .setPrice(100)
+                .setQuantity(5)
+                .setAction(TradeAction.BUY)
+                .build();
+        var buyResponse = this.userServiceBlockingStub.tradeStock(buyRequest);
+        Assertions.assertEquals(9500, buyResponse.getBalance());
+        Assertions.assertEquals(Ticker.AMAZON, buyResponse.getTicker());
+        Assertions.assertEquals(5, buyResponse.getQuantity());
+
+        var userRequest = UserInformationRequest.newBuilder()
+                .setUserId(2)
+                .build();
+        var userResponse = this.userServiceBlockingStub.getUserInformation(userRequest);
+        Assertions.assertEquals(1, userResponse.getHoldingsCount());
+        Assertions.assertEquals(Ticker.AMAZON, userResponse.getHoldingsList().getFirst().getTicker());
+
+        var sellRequest = buyRequest.toBuilder().setAction(TradeAction.SELL).setPrice(102).build();
+        var sellResponse = this.userServiceBlockingStub.tradeStock(sellRequest);
+
+        Assertions.assertEquals(10010, sellResponse.getBalance());
+        Assertions.assertEquals(Ticker.AMAZON, sellResponse.getTicker());
+        Assertions.assertEquals(5, sellResponse.getQuantity());
+    }
 }
