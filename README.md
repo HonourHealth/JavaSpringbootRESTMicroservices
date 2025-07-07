@@ -13,6 +13,13 @@ A comprehensive microservices-based architecture that consists of multiple servi
 - Resilience4j for circuit breaking and retry mechanisms
 - Distributed tracing with Micrometer and Zipkin
 
+### springboot-grpc-microservices
+A trading platform demonstrating gRPC-based microservices communication with Spring Boot:
+- User Service: Manages user accounts, portfolios, and trading operations
+- Stock Service: Provides real-time stock prices and streaming market data
+- Aggregator Service: API Gateway with REST endpoints and web interface
+- Protocol Buffers for type-safe inter-service communication
+
 ### springboot-kafka-microservices
 A microservices architecture using Kafka for event-driven communication between services:
 - Order Service: Creates orders and publishes events
