@@ -135,7 +135,7 @@ mvn spring-boot:run
 | Method | Endpoint | Description | Example |
 |--------|----------|-------------|---------|
 | GET | `/user/{id}` | Get user information | `/user/1` |
-| POST | `/user/{id}/trade` | Execute trade | `/user/1/trade` |
+| POST | `/trade` | Execute trade | `/trade` |
 
 ### Example API Requests
 
