@@ -1,1 +1,11 @@
 D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\AggregatorServiceApplication.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\config\ApplicationConfiguration.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\controller\advice\ApplicationExceptionHandler.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\controller\StockController.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\controller\TradeController.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\controller\UserController.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\dto\PriceUpdateDto.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\service\PriceUpdateListener.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\service\PriceUpdateSubscriptionInitializer.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\service\TradeService.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\aggregator-service\src\main\java\com\example\aggregator\service\UserService.java

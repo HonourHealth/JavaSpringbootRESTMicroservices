@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("user")
 @AllArgsConstructor
-@RequestMapping("users")
 public class UserController {
+
     private UserService userService;
 
     @GetMapping(value = "{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserInformation getUserInformation(@PathVariable int userId) {
-        return userService.getUserInformation(userId); // Example userId, replace with actual parameter
+    public UserInformation getUserInformation(@PathVariable Integer userId) {
+        return this.userService.getUserInformation(userId);
     }
+
 }

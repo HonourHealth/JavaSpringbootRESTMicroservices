@@ -1,1 +1,15 @@
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\config\ServerConfiguration.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\entity\PortfolioItem.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\entity\User.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\exceptions\InsufficientBalanceException.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\exceptions\InsufficientSharesException.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\exceptions\UnknownTickerException.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\exceptions\UnknownUserException.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\repository\PortfolioItemRepository.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\repository\UserRepository.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\service\advice\ServiceExceptionHandler.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\service\handler\StockTradeRequestHandler.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\service\handler\UserInformationRequestHandler.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\service\UserService.java
 D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\UserServiceApplication.java
+D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-grpc-microservices\user-service\src\main\java\com\example\user\util\EntityMessageMapper.java

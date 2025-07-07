@@ -31,8 +31,8 @@ public class PriceUpdateListener implements StreamObserver<PriceUpdate> {
     public SseEmitter createEmitter() {
         SseEmitter emitter = new SseEmitter(this.sseTimeout);
         this.emitters.add(emitter);
-        emitter.onError(ex -> this.emitters.remove(emitter));
         emitter.onTimeout(() -> this.emitters.remove(emitter));
+        emitter.onError(ex -> this.emitters.remove(emitter));
         return emitter;
     }
 

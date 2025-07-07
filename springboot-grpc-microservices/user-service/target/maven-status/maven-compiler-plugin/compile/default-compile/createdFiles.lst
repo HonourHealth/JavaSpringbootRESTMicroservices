@@ -1,1 +1,15 @@
+com\example\user\entity\PortfolioItem.class
+com\example\user\service\UserService.class
 com\example\user\UserServiceApplication.class
+com\example\user\entity\User.class
+com\example\user\service\handler\UserInformationRequestHandler.class
+com\example\user\repository\UserRepository.class
+com\example\user\service\handler\StockTradeRequestHandler.class
+com\example\user\service\advice\ServiceExceptionHandler.class
+com\example\user\repository\PortfolioItemRepository.class
+com\example\user\util\EntityMessageMapper.class
+com\example\user\exceptions\InsufficientBalanceException.class
+com\example\user\config\ServerConfiguration.class
+com\example\user\exceptions\UnknownTickerException.class
+com\example\user\exceptions\InsufficientSharesException.class
+com\example\user\exceptions\UnknownUserException.class
