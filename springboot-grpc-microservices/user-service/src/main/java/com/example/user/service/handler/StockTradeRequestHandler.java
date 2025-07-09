@@ -6,6 +6,7 @@ import com.example.user.StockTradeResponse;
 import com.example.user.entity.PortfolioItem;
 import com.example.user.entity.User;
 import com.example.user.exceptions.InsufficientBalanceException;
+import com.example.user.exceptions.InsufficientSharesException;
 import com.example.user.exceptions.UnknownTickerException;
 import com.example.user.exceptions.UnknownUserException;
 import com.example.user.repository.PortfolioItemRepository;
@@ -29,6 +30,7 @@ public class StockTradeRequestHandler {
 
         var totalPrice = stockTradeRequest.getPrice() * stockTradeRequest.getQuantity();
         this.validateUserBalance(user.getId(), user.getBalance(), totalPrice);
+        
         user.setBalance(user.getBalance() - totalPrice);
         this.portfolioItemRepository.findByUserIdAndTicker(user.getId(), stockTradeRequest.getTicker())
                 .ifPresentOrElse(
@@ -46,8 +48,7 @@ public class StockTradeRequestHandler {
 
         PortfolioItem portfolioItem = this.portfolioItemRepository.findByUserIdAndTicker(user.getId(), stockTradeRequest.getTicker())
                 .filter(pi -> pi.getQuantity() >= stockTradeRequest.getQuantity())
-                .orElseThrow(() -> new InsufficientBalanceException(user.getId()));
-
+                .orElseThrow(() -> new InsufficientSharesException(user.getId()));
 
         var totalPrice = stockTradeRequest.getPrice() * stockTradeRequest.getQuantity();
         user.setBalance(user.getBalance() + totalPrice);
