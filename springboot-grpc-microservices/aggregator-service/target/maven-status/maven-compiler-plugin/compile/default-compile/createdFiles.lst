@@ -1,11 +1,11 @@
 com\example\aggregator\AggregatorServiceApplication.class
 com\example\aggregator\controller\StockController.class
-com\example\aggregator\config\ApplicationConfiguration.class
-com\example\aggregator\service\TradeService.class
 com\example\aggregator\controller\advice\ApplicationExceptionHandler.class
 com\example\aggregator\service\PriceUpdateListener.class
 com\example\aggregator\service\PriceUpdateSubscriptionInitializer.class
-com\example\aggregator\dto\PriceUpdateDto.class
 com\example\aggregator\controller\TradeController.class
 com\example\aggregator\controller\UserController.class
+com\example\aggregator\config\ApplicationConfiguration.class
+com\example\aggregator\service\TradeService.class
+com\example\aggregator\dto\PriceUpdateDto.class
 com\example\aggregator\service\UserService.class
