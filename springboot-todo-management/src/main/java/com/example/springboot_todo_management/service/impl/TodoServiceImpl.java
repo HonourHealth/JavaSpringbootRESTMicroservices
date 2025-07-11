@@ -19,21 +19,21 @@ public class TodoServiceImpl implements TodoService {
 
     private ModelMapper modelMapper;
 
+    private static final String TODO_NOT_FOUND_MESSAGE = "Todo not found with id: ";
+
     @Override
     public TodoDto addTodo(TodoDto todoDto) {
         Todo todo = modelMapper.map(todoDto, Todo.class);
 
         Todo savedTodo = todoRepository.save(todo);
 
-        TodoDto savedTodoDto = modelMapper.map(savedTodo, TodoDto.class);
-
-        return savedTodoDto;
+        return modelMapper.map(savedTodo, TodoDto.class);
     }
 
     @Override
     public TodoDto getTodoById(Long id) {
         Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException(TODO_NOT_FOUND_MESSAGE + id));
         return modelMapper.map(todo, TodoDto.class);
     }
 
@@ -48,7 +48,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public TodoDto updateTodo(TodoDto todoDto, Long id) {
         Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException(TODO_NOT_FOUND_MESSAGE + id));
 
         todo.setTitle(todoDto.getTitle());
         todo.setDescription(todoDto.getDescription());
@@ -57,5 +57,13 @@ public class TodoServiceImpl implements TodoService {
         Todo updatedTodo = todoRepository.save(todo);
 
         return modelMapper.map(updatedTodo, TodoDto.class);
+    }
+
+    @Override
+    public void deleteTodoById(Long id) {
+        todoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(TODO_NOT_FOUND_MESSAGE + id));
+
+        todoRepository.deleteById(id);
     }
 }
