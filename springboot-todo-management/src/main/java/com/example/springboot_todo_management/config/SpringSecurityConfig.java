@@ -3,6 +3,7 @@ package com.example.springboot_todo_management.config;
 import lombok.Getter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 
 @Configuration
+@EnableMethodSecurity
 public class SpringSecurityConfig {
 
     @Bean
@@ -42,11 +44,11 @@ public class SpringSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers(HttpMethod.POST, URL).hasRole(Role.ADMIN.getValue());
-                    authorize.requestMatchers(HttpMethod.PUT, URL).hasRole(Role.ADMIN.getValue());
-                    authorize.requestMatchers(HttpMethod.DELETE, URL).hasRole(Role.ADMIN.getValue());
-                    authorize.requestMatchers(HttpMethod.GET, URL).hasAnyRole(Role.ADMIN.getValue(), Role.USER.getValue());
-                    authorize.requestMatchers(HttpMethod.PATCH, URL).hasAnyRole(Role.ADMIN.getValue(), Role.USER.getValue());
+//                    authorize.requestMatchers(HttpMethod.POST, URL).hasRole(Role.ADMIN.getValue());
+//                    authorize.requestMatchers(HttpMethod.PUT, URL).hasRole(Role.ADMIN.getValue());
+//                    authorize.requestMatchers(HttpMethod.DELETE, URL).hasRole(Role.ADMIN.getValue());
+//                    authorize.requestMatchers(HttpMethod.GET, URL).hasAnyRole(Role.ADMIN.getValue(), Role.USER.getValue());
+//                    authorize.requestMatchers(HttpMethod.PATCH, URL).hasAnyRole(Role.ADMIN.getValue(), Role.USER.getValue());
                     authorize.anyRequest().authenticated();
                 })
                 .httpBasic(Customizer.withDefaults());
