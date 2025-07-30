@@ -1,8 +1,11 @@
 package com.example.springboot_todo_management.config;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,27 +21,30 @@ import org.springframework.security.config.Customizer;
 
 @Configuration
 @EnableMethodSecurity
+@AllArgsConstructor
 public class SpringSecurityConfig {
+
+    private UserDetailsService userDetailsService;
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Getter
-    private enum Role {
-        ADMIN("ADMIN"),
-        USER("USER");
+//    @Getter
+//    private enum Role {
+//        ADMIN("ADMIN"),
+//        USER("USER");
+//
+//        private final String value;
+//
+//        Role(String value) {
+//            this.value = value;
+//        }
+//
+//    }
 
-        private final String value;
-
-        Role(String value) {
-            this.value = value;
-        }
-
-    }
-
-    private static final String URL = "/api/**";
+//    private static final String URL = "/api/**";
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -55,19 +61,23 @@ public class SpringSecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user1 = User.builder()
-                .username("user1")
-                .password(passwordEncoder().encode("password1"))
-                .roles(Role.USER.getValue())
-                .build();
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles(Role.ADMIN.getValue())
-                .build();
-
-        return new InMemoryUserDetailsManager(user1, admin);
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
+
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user1 = User.builder()
+//                .username("user1")
+//                .password(passwordEncoder().encode("password1"))
+//                .roles(Role.USER.getValue())
+//                .build();
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles(Role.ADMIN.getValue())
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user1, admin);
+//    }
 }
