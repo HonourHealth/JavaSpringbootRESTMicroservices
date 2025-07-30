@@ -45,6 +45,7 @@ public class SpringSecurityConfig {
 //    }
 
 //    private static final String URL = "/api/**";
+    private static final String AUTH_URL = "/api/auth/**";
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -55,6 +56,7 @@ public class SpringSecurityConfig {
 //                    authorize.requestMatchers(HttpMethod.DELETE, URL).hasRole(Role.ADMIN.getValue());
 //                    authorize.requestMatchers(HttpMethod.GET, URL).hasAnyRole(Role.ADMIN.getValue(), Role.USER.getValue());
 //                    authorize.requestMatchers(HttpMethod.PATCH, URL).hasAnyRole(Role.ADMIN.getValue(), Role.USER.getValue());
+                    authorize.requestMatchers(AUTH_URL).permitAll();
                     authorize.anyRequest().authenticated();
                 })
                 .httpBasic(Customizer.withDefaults());
