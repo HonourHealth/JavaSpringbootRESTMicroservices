@@ -1,5 +1,6 @@
 package com.example.springboot_todo_management.controller;
 
+import com.example.springboot_todo_management.dto.LoginDto;
 import com.example.springboot_todo_management.dto.RegisterDto;
 import com.example.springboot_todo_management.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -21,5 +22,11 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+        String response = authService.login(loginDto);
+        return ResponseEntity.ok(response);
     }
 }

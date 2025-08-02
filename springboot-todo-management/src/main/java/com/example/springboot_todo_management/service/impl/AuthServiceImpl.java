@@ -1,5 +1,6 @@
 package com.example.springboot_todo_management.service.impl;
 
+import com.example.springboot_todo_management.dto.LoginDto;
 import com.example.springboot_todo_management.dto.RegisterDto;
 import com.example.springboot_todo_management.entity.Role;
 import com.example.springboot_todo_management.entity.User;
@@ -9,6 +10,11 @@ import com.example.springboot_todo_management.repository.UserRepository;
 import com.example.springboot_todo_management.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +25,19 @@ import java.util.Set;
 @AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public String register(RegisterDto registerDto) {
 
-        if (userRepository.existsByUsername(registerDto.getUsername())) {
+        if (Boolean.TRUE.equals(userRepository.existsByUsername(registerDto.getUsername()))) {
             throw new TodoAPIException(HttpStatus.BAD_REQUEST, "Username already exists");
         }
 
-        if (userRepository.existsByEmail(registerDto.getEmail())) {
+        if (Boolean.TRUE.equals(userRepository.existsByEmail(registerDto.getEmail()))) {
             throw new TodoAPIException(HttpStatus.BAD_REQUEST, "Email already exists");
         }
 
@@ -46,5 +53,15 @@ public class AuthServiceImpl implements AuthService {
         user.setRoles(roles);
         userRepository.save(user);
         return "User registered successfully";
+    }
+
+    @Override
+    public String login(LoginDto loginDto) {
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsernameOrEmail(),
+                loginDto.getPassword()
+        ));
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        return "User logged in successfully";
     }
 }

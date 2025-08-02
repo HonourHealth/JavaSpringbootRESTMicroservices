@@ -1,15 +1,29 @@
-import React from 'react'
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 const HeaderComponent = () => {
-  return (
-    <div>
-        <header>
-            <nav className="navbar navbar-expand-md navbar-light bg-secondary justify-content-center">
-                <a href='http://localhost:3000' className="navbar-brand" style={{fontSize: '1.5rem'}}>Todo Management App</a>
-            </nav>
-        </header>
-    </div>
-  )
-}
+    return (
+        <div>
+            <header>
+                <nav className="navbar navbar-expand-md navbar-light bg-secondary">
+                    <div className="container-fluid position-relative">
+                        <a
+                            href="http://localhost:3000"
+                            className="navbar-brand position-absolute start-50 translate-middle-x"
+                            style={{ fontSize: "1.5rem" }}
+                        >
+                            Todo Management App
+                        </a>
+                        <div className="navbar-nav ms-auto">
+                            <NavLink to="/register" className="nav-link">
+                                Register
+                            </NavLink>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        </div>
+    );
+};
 
-export default HeaderComponent
+export default HeaderComponent;
