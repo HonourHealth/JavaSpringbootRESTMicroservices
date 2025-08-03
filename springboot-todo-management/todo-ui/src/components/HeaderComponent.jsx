@@ -7,6 +7,11 @@ const HeaderComponent = () => {
             <header>
                 <nav className="navbar navbar-expand-md navbar-light bg-secondary">
                     <div className="container-fluid position-relative">
+                        <div className="navbar-nav">
+                            <NavLink to="/todos" className="nav-link">
+                                Todos
+                            </NavLink>
+                        </div>
                         <a
                             href="http://localhost:3000"
                             className="navbar-brand position-absolute start-50 translate-middle-x"
