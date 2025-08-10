@@ -23,6 +23,9 @@ const HeaderComponent = () => {
                             <NavLink to="/register" className="nav-link">
                                 Register
                             </NavLink>
+                            <NavLink to="/login" className="nav-link">
+                                Login
+                            </NavLink>
                         </div>
                     </div>
                 </nav>
