@@ -61,7 +61,7 @@ public class SpringSecurityConfig {
 //                    authorize.requestMatchers(HttpMethod.GET, URL).hasAnyRole(Role.ADMIN.getValue(), Role.USER.getValue());
 //                    authorize.requestMatchers(HttpMethod.PATCH, URL).hasAnyRole(Role.ADMIN.getValue(), Role.USER.getValue());
                     authorize.requestMatchers(AUTH_URL).permitAll();
-                    authorize.requestMatchers("/api/todos/**").permitAll(); // Allow public access to todos
+                    authorize.requestMatchers("/api/todos/**").permitAll();
                     authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     authorize.anyRequest().authenticated();
                 })

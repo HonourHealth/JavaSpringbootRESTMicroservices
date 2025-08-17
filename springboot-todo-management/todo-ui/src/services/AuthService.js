@@ -18,8 +18,18 @@ export const storeToken = (token) => {
 
 export const getToken = () => {
     const token = localStorage.getItem("token");
-    if (token) {
-        return `Bearer ${token}`;
-    }
-    return null;
+    return token;
+};
+
+export const saveLoggedInUser = (username) =>
+    sessionStorage.setItem("authenticatedUser", username);
+
+export const isUserLoggedIn = () => {
+    const user = sessionStorage.getItem("authenticatedUser");
+    return user !== null;
+};
+
+export const getLoggedInUser = () => {
+    const user = sessionStorage.getItem("authenticatedUser");
+    return user;
 };
