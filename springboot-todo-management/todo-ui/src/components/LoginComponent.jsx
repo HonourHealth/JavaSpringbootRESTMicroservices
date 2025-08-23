@@ -18,7 +18,9 @@ const LoginComponent = () => {
             .then((response) => {
                 console.log("Login successful:", response.data);
                 localStorage.clear();
-                const token = "Basic " + window.btoa(`${username}:${password}`);
+                //const token = "Basic " + window.btoa(`${username}:${password}`);
+
+                const token = "Bearer " + response.data.accessToken;
                 storeToken(token);
                 saveLoggedInUser(username);
                 navigate("/todos");

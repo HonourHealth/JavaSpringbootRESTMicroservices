@@ -1,5 +1,7 @@
 package com.example.springboot_todo_management.config;
 
+import com.example.springboot_todo_management.security.JwtAuthenticationEntryPoint;
+import com.example.springboot_todo_management.security.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +20,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -28,6 +31,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SpringSecurityConfig {
 
     private UserDetailsService userDetailsService;
+
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -47,7 +54,7 @@ public class SpringSecurityConfig {
 //
 //    }
 
-//    private static final String URL = "/api/**";
+    //    private static final String URL = "/api/**";
     private static final String AUTH_URL = "/api/auth/**";
 
     @Bean
@@ -66,6 +73,11 @@ public class SpringSecurityConfig {
                     authorize.anyRequest().authenticated();
                 })
                 .httpBasic(Customizer.withDefaults());
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint));
+
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 

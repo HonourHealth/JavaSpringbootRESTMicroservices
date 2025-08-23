@@ -1,5 +1,6 @@
 package com.example.springboot_todo_management.controller;
 
+import com.example.springboot_todo_management.dto.JwtAuthResponse;
 import com.example.springboot_todo_management.dto.LoginDto;
 import com.example.springboot_todo_management.dto.RegisterDto;
 import com.example.springboot_todo_management.service.AuthService;
@@ -23,8 +24,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        String response = authService.login(loginDto);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDto loginDto) {
+        String token = authService.login(loginDto);
+
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 }
