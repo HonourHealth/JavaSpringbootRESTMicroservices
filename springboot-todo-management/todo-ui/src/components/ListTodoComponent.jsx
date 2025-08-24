@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { isAdminUser } from "../services/AuthService";
 import {
     completeTodo,
     deleteTodo,
     getAllTodos,
     incompleteTodo,
 } from "../services/TodoService";
-import { useNavigate } from "react-router-dom";
 
 const ListTodoComponent = () => {
     const [todos, setTodos] = useState([]);
     const navigate = useNavigate();
+    const isAdmin = isAdminUser();
 
     useEffect(() => {
         listTodos();
@@ -26,15 +28,27 @@ const ListTodoComponent = () => {
     }
 
     function addNewTodo() {
+        if (!isAdmin) {
+            window.alert("Only admin users are allowed to add new todos.");
+            return;
+        }
         navigate("/add-todo");
     }
 
     function updateTodo(id) {
+        if (!isAdmin) {
+            window.alert("Only admin users are allowed to update todos.");
+            return;
+        }
         console.log("Update todo with ID:", id);
         navigate(`/update-todo/${id}`);
     }
 
     function removeTodo(id) {
+        if (!isAdmin) {
+            window.alert("Only admin users are allowed to delete todos.");
+            return;
+        }
         deleteTodo(id)
             .then(() => {
                 listTodos();
