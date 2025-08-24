@@ -47,6 +47,14 @@ A tutorial project covering RabbitMQ integration with Spring Boot, including exc
 ### springboot-kafka-tutorial
 A basic tutorial project demonstrating Kafka integration with Spring Boot, including producer and consumer implementations with essential configurations.
 
+### springboot-todo-management
+A full-stack Todo Management application with Spring Boot backend and React frontend:
+- JWT-based authentication and role-based authorization
+- RESTful APIs for CRUD operations on todos
+- Spring Security with BCrypt password encoding
+- React frontend with Bootstrap UI and protected routes
+- MySQL database integration with automatic schema creation
+
 ### banking-app
 A Spring Boot application demonstrating core banking functionalities with RESTful APIs, including account management, transactions, and basic banking operations.
 
