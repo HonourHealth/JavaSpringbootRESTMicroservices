@@ -90,6 +90,16 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <to>
+                        <image>example/${project.artifactId}:s4</image> <!-- Update the name as Docker Hub username -->
+                    </to>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
