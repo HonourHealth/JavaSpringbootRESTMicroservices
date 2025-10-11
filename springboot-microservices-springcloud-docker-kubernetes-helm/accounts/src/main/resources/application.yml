@@ -14,3 +14,28 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to Accounts microservice"
+  contactInfo:
+    name: "Onur Can"
+    email: "example@example.com"
+  support:
+    - "Support Team"
+    - "Help Desk"
