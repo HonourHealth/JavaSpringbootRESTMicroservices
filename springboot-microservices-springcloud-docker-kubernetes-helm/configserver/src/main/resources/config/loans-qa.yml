@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+loans:
+  message: "Welcome to bank loans related QA APIs "
+  contactDetails:
+    name: "Onur Health - QA Lead"
+    email: "example9@example.com"
+  onCallSupport:
+    - (785) 545-6565
+    - (853) 546-3467

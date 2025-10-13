@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to bank accounts related QA APIs "
+  contactDetails:
+    name: "10ur Juan - QA Lead"
+    email: "example3@example.com"
+  onCallSupport:
+    - (666) 265-3765
+    - (666) 734-8371

@@ -34,8 +34,8 @@ build:
 accounts:
   message: "Welcome to Accounts microservice"
   contactInfo:
-    name: "John Doe"
-    email: "john@example.com"
+    name: "Onur Can"
+    email: "example@example.com"
   support:
     - "Support Team"
     - "Help Desk"

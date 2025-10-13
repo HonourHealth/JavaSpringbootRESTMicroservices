@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+loans:
+  message: "Welcome to bank loans related prod APIs "
+  contactDetails:
+    name: "10ur Health - Product Owner"
+    email: "example8@example.com"
+  onCallSupport:
+    - (723) 656-8709
+    - (156) 342-0956
