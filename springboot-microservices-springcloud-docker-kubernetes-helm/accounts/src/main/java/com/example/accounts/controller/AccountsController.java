@@ -33,18 +33,18 @@ public class AccountsController {
 
     private final IAccountsService iAccountsService;
 
-    public AccountsController(IAccountsService iAccountsService, Environment environment, AccountsContactInfoDto accountsContactInfoDto) {
-        this.iAccountsService = iAccountsService;
-        this.environment = environment;
-        this.accountsContactInfoDto = accountsContactInfoDto;
-    }
-
-    @Value("${build.version}")
+    @Value("${build.version:unknown}")
     private String buildVersion;
 
     private final Environment environment;
 
     private final AccountsContactInfoDto accountsContactInfoDto;
+
+    public AccountsController(IAccountsService iAccountsService, Environment environment, AccountsContactInfoDto accountsContactInfoDto) {
+        this.iAccountsService = iAccountsService;
+        this.environment = environment;
+        this.accountsContactInfoDto = accountsContactInfoDto;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customerDto) {

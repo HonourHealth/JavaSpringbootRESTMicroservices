@@ -2,18 +2,31 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+#    active: native
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: "classpath:/config"
-
+#        native:
+#          search-locations: "classpath:/config"
+        git:
+          uri: "https://github.com/HonourHealth/config-server-repo.git"
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+    bus:
+      enabled: false  # Disable Spring Cloud Bus if RabbitMQ is not available
   rabbitmq:
-    host: "localhost"
+    host: localhost
     port: 5672
-    username: "guest"
-    password: "guest"
+    username: guest
+    password: guest
+    connection-timeout: 5000
+    requested-heartbeat: 10
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration  # Exclude RabbitMQ auto-configuration
 
 management:
   endpoints:
@@ -25,6 +38,8 @@ management:
       enabled: true
     liveness-state:
       enabled: true
+    rabbit:
+      enabled: false  # Disable RabbitMQ health check to avoid warnings
   endpoint:
     health:
       probes:

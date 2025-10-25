@@ -20,14 +20,24 @@ spring:
     show-sql: true
   config:
     import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    bus:
+      enabled: false  # Disable Spring Cloud Bus if RabbitMQ is not available
   rabbitmq:
     host: "localhost"
     port: 5672
     username: "guest"
     password: "guest"
+    connection-timeout: 5000
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  health:
+    rabbit:
+      enabled: false  # Disable RabbitMQ health check
+
+build:
+  version: "1.0.0"

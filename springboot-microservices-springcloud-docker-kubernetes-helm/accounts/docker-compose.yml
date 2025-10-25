@@ -1,6 +1,6 @@
 services:
   accounts:
-    image: "example/accounts:s4" #You need to change this to your Docker Hub username
+    image: "romasko/accounts:s4" #You need to change this to your Docker Hub username
     container_name: accounts-microservice
     ports:
       - "8080:8080"
@@ -11,7 +11,7 @@ services:
     networks:
       - banking-network
   loans:
-    image: "example/loans:s4" #You need to change this to your Docker Hub username
+    image: "romasko/loans:s4" #You need to change this to your Docker Hub username
     container_name: loans-microservice
     ports:
       - "8090:8090"
@@ -22,7 +22,7 @@ services:
     networks:
       - banking-network
   cards:
-    image: "example/cards:s4" #You need to change this to your Docker Hub username
+    image: "romasko/cards:s4" #You need to change this to your Docker Hub username
     container_name: cards-microservice
     ports:
       - "9000:9000"
