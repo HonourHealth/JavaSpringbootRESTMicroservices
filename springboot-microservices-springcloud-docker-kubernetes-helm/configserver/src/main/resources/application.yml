@@ -38,8 +38,6 @@ management:
       enabled: true
     liveness-state:
       enabled: true
-    rabbit:
-      enabled: false  # Disable RabbitMQ health check to avoid warnings
   endpoint:
     health:
       probes:

@@ -1,4 +1,16 @@
 services:
+  configserver:
+    image: "romasko/configserver:s4" #You need to change this to your Docker Hub username
+    container_name: configserver-microservice
+    ports:
+      - "8071:8071"
+    deploy:
+      resources:
+        limits:
+          memory: 1024m
+    networks:
+      - banking-network
+
   accounts:
     image: "romasko/accounts:s4" #You need to change this to your Docker Hub username
     container_name: accounts-microservice
@@ -10,6 +22,11 @@ services:
           memory: 1024m
     networks:
       - banking-network
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
+
   loans:
     image: "romasko/loans:s4" #You need to change this to your Docker Hub username
     container_name: loans-microservice
@@ -21,6 +38,10 @@ services:
           memory: 1024m
     networks:
       - banking-network
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
   cards:
     image: "romasko/cards:s4" #You need to change this to your Docker Hub username
     container_name: cards-microservice
@@ -32,6 +53,10 @@ services:
           memory: 1024m
     networks:
       - banking-network
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
 networks:
   banking-network:
     driver: "bridge"
