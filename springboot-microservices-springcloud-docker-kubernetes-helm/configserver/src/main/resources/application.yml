@@ -15,18 +15,6 @@ spring:
           timeout: 5
           clone-on-start: true
           force-pull: true
-    bus:
-      enabled: false  # Disable Spring Cloud Bus if RabbitMQ is not available
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-    connection-timeout: 5000
-    requested-heartbeat: 10
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration  # Exclude RabbitMQ auto-configuration
 
 management:
   endpoints:
