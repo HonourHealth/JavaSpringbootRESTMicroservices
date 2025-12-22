@@ -15,7 +15,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: "eazybytes/eurekaserver:s1"
+    image: "romasko/eurekaserver:s1"
     container_name: eurekaserver-microservice
     ports:
       - "8070:8070"
