@@ -23,7 +23,7 @@ spring:
   cloud:
     openfeign:
       circuitbreaker:
-        enabled=true:
+        enabled: true
 
 management:
   endpoints:
