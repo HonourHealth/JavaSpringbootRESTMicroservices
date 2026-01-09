@@ -7,24 +7,36 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'accounts:8080' ]
+        labels:
+          application: 'accounts'
   - job_name: 'loans'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'loans:8090' ]
+        labels:
+          application: 'loans'
   - job_name: 'cards'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'cards:9000' ]
+        labels:
+          application: 'cards'
   - job_name: 'gatewayserver'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'gatewayserver:8072' ]
+        labels:
+          application: 'gatewayserver'
   - job_name: 'eurekaserver'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'eurekaserver:8070' ]
+        labels:
+          application: 'eurekaserver'
   - job_name: 'configserver'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ 'configserver:8071' ]
-  
+        labels:
+          application: 'configserver'
+
