@@ -104,7 +104,9 @@ public class CardsController {
             String mobileNumber
     ) {
         logger.debug("Correlation ID: {}", correlationId);
+        logger.debug("fetchCardDetails started");
         CardsDto cardsDto = iCardsService.fetchCard(mobileNumber);
+        logger.debug("fetchCardDetails ended");
         return ResponseEntity.status(HttpStatus.OK).body(cardsDto);
     }
 

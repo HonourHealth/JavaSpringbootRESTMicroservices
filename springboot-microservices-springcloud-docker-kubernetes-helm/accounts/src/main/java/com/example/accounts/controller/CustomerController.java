@@ -47,14 +47,16 @@ public class CustomerController {
                     schema = @Schema(implementation = ErrorResponseDto.class)
             )
     )
-    @GetMapping("/fetchCustomerDetails")
+    @GetMapping("/")
     public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(
             @RequestHeader("correlation-id") String correlationId,
             @RequestParam
             @Pattern(regexp = "(^$|\\d{10})", message = "Mobile number must be 10 digits")
             String mobileNumber) {
         logger.debug("Correlation ID: {}", correlationId);
+        logger.debug("fetchCustomerDetails started");
         CustomerDetailsDto customerDetailsDto = customerService.fetchCustomerDetails(mobileNumber, correlationId);
+        logger.debug("fetchCustomerDetails ended");
         return ResponseEntity.ok(customerDetailsDto);
     }
 }

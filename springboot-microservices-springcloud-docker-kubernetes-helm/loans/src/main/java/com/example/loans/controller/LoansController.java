@@ -105,7 +105,9 @@ public class LoansController {
             String mobileNumber
     ) {
         logger.debug("Correlation ID: {}", correlationId);
+        logger.debug("fetchLoanDetails started");
         LoansDto loansDto = iLoansService.fetchLoan(mobileNumber);
+        logger.debug("fetchLoanDetails completed");
         return ResponseEntity.status(HttpStatus.OK).body(loansDto);
     }
 
