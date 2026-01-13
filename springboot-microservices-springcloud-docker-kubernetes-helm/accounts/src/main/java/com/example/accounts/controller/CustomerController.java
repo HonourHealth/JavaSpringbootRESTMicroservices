@@ -47,7 +47,7 @@ public class CustomerController {
                     schema = @Schema(implementation = ErrorResponseDto.class)
             )
     )
-    @GetMapping("/")
+    @GetMapping("/fetchCustomerDetails")
     public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(
             @RequestHeader("correlation-id") String correlationId,
             @RequestParam
