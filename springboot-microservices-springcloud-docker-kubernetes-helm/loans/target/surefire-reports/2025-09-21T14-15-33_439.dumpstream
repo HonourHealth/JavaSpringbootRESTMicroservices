@@ -1,5 +1,0 @@
-# Created at 2025-09-21T14:15:33.625
-Boot Manifest-JAR contains absolute paths in classpath 'D:\Program Files\GitHub\JavaSpringbootRESTMicroservices\springboot-microservices-springcloud-docker-kubernetes-helm\loans\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-

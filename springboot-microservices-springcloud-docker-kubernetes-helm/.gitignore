@@ -1,61 +1,58 @@
-
+# IDE
+.idea/
+*.iml
 .qodo
-/loans/target/jib-cache/layers/e1ae73d3ab34b03f7cdb2120cf0dbc32af927fa57c64c06a3c9668d567e247ff/0d005b5b803f8f09d97f3f7b6ff4a619a64a4087f509e335f96b381b933f9b3c
-/accounts/target/jib-cache/layers/238c4d0c1642e9c05986b46235412040a5b3ef6cf7865f6345ccd60cd3ee3cbe/5d33dd0697f0bae42f0facac8b964b4104fec8aed31dd9c51e3835c57e18453f
-/eurekaserver/.gitignore
-/eurekaserver/.gitattributes
-/accounts/target/jib-cache/layers/dedeaa2971feda92a1a2a6aa38b4eaae1647959e0a54bff36b8bfdeaa773cd03/7e7fd2df01ffb7a2afbd8b9fcd4ec0f16ee3c003e98c0c8e39be7d5cab5605d2
-/accounts/target/jib-cache/selectors/7f8bfd1c3126f726442ee2e0d5bee96951619888b472fce49e9d8672fe86906d
-/accounts/target/jib-cache/selectors/62f4693ef43b895373b1cadc36f593936ffb31134b87c149761332b9fbe3bf63
-/loans/target/jib-cache/selectors/62f4693ef43b895373b1cadc36f593936ffb31134b87c149761332b9fbe3bf63
-/accounts/target/jib-cache/selectors/67c1b3eac59c62a097269c7dc7a342e6f6e5243dc4cb9f7d6b5d672081e9a52e
-/loans/target/jib-cache/selectors/67c1b3eac59c62a097269c7dc7a342e6f6e5243dc4cb9f7d6b5d672081e9a52e
-/accounts/target/jib-cache/selectors/82ae104cb38a43654190324a7d27604e2c3a85bc42c175e136dd520dd242fd13
-/loans/target/jib-cache/layers/38de743e5b6c858f9f29a32fb3e59f676907586196b0377ad859e1bdf328e1d4/630d8d14454cfeb9316091a43aeb51cbb55267cfd50c135dd70aba73566f6bde
-/loans/target/jib-cache/layers/c9f09236cb74b876aa05daf12d0ef70de2fb228a63bb69ecdc82fdfbe19aa7b1/29313dc0cfe46d57a7c48ab0f1d394634aac7b2607eebeebbdc62f9517e074a0
-/accounts/target/jib-cache/selectors/03610552cff3525d56bd51cf2d7f65f3a29a65f9d3a75e8bd07ebb42546fb1fb
-/accounts/target/jib-cache/layers/0c36ae14b6f3b4b1fd957881f6acfa0baf7876205c4e0d8e542ca68c19a162fa/7173931c0a98d46847a73663ca448a4f92d31fccd20d52d76b72151e2e6de15a
-/accounts/target/jib-cache/layers/13b25db7f050d9851ae5e19ac12a0d22f516b2522a2594e891af6b1deeeca368/9839334aead594054c18a2d316dddcec682c6a4f46f6920ac9dba76f3d221ab3
-/loans/target/jib-cache/layers/13b25db7f050d9851ae5e19ac12a0d22f516b2522a2594e891af6b1deeeca368/9839334aead594054c18a2d316dddcec682c6a4f46f6920ac9dba76f3d221ab3
-/accounts/target/jib-cache/layers/f6063a8220a6b12c2578d396bb4199b5db676ea1564df2b2e92f37e8e54f8173/639146309c4b18c8dde100d3d3c87f903eb3e30608a1ade3a8fd1b6b9538753a
-/accounts/target/jib-cache/layers/5eed307152c69743a7316859528f2f950e0c0029e301d7f2f979d0608094c85c/a4a655659082fa740a82077d036d86625faab8724a736882eb0952002d89a936
-/loans/target/jib-cache/layers/5eed307152c69743a7316859528f2f950e0c0029e301d7f2f979d0608094c85c/a4a655659082fa740a82077d036d86625faab8724a736882eb0952002d89a936
-/loans/target/jib-cache/layers/8bad0c4fbb8b9bd4238051fbf1e922f1f3160459a4627b2bd4e16ce2fb389a2a/a228c54f78b7f71779688b78f2a01cb16c7643e8658dcc893add31515281b025
-/loans/target/jib-cache/selectors/a505473fa0a12f0acdb0471260c70b01cfe68b2e49028505ba4328702788bd0c
-/accounts/target/jib-cache/selectors/b3a9b5a86be35b27ecc143dea5574498a047849f5d786fad37f6e1a06f22f985
-/loans/target/jib-cache/selectors/c3f1c596bc1b4658dc55715ab658f562a15dc09bb8d7a647bea725d224388c53
-/loans/target/jib-cache/selectors/c5956234d8917005c0872d7980a50cda516f8b969448c999a09ffc2c4091f50f
-/accounts/target/classes/com/example/accounts/dto/CardsDto.class
-/accounts/target/classes/com/example/accounts/service/client/CardsFeignClient.class
-/accounts/target/classes/com/example/accounts/controller/CustomerController.class
-/accounts/target/classes/com/example/accounts/dto/CustomerDetailsDto.class
-/accounts/target/classes/com/example/accounts/service/impl/CustomerServiceImpl.class
-/accounts/target/jib-cache/selectors/d55038bbbce7a7cd5bf6ffd0f9faaa3e2316518235ce7176ba11526a5b018150
-/loans/target/jib-cache/selectors/e22e02697796e16a3556f922db814a3d3c02dc42e01bfd569895db68a32e3acd
-/loans/target/jib-cache/selectors/e35bbed857977b15b440bff38b49f1fdb51c8d17d3f25753ddbe9d11f6175802
-/accounts/target/jib-cache/selectors/ec20e2af2271ddb648915e3309838af12f8a75a042c274e9f29501a2d5ceba07
-/loans/target/jib-cache/selectors/fbd6f4f90ac609bd5baa1918b1dfe56f82fbeb1650933938a182e5077ca3c69b
-/accounts/target/classes/com/example/accounts/service/ICustomerService.class
-/accounts/target/jib-cache/jib-classpath-file
-/loans/target/jib-cache/jib-classpath-file
-/accounts/target/jib-image.digest
-/loans/target/jib-image.digest
-/accounts/target/jib-image.id
-/loans/target/jib-image.id
-/accounts/target/jib-image.json
-/loans/target/jib-image.json
-/accounts/target/jib-cache/jib-main-class-file
-/loans/target/jib-cache/jib-main-class-file
-/accounts/target/classes/com/example/accounts/dto/LoansDto.class
-/accounts/target/classes/com/example/accounts/service/client/LoansFeignClient.class
-/eurekaserver/.mvn/wrapper/maven-wrapper.properties
-/eurekaserver/mvnw
-/eurekaserver/mvnw.cmd
-/accounts/target/jib-cache/layers/e46591190d4a17030e524c12f824db608f28cdde7df40aab2b58ad4893614820/0d7373b8dda606070380bbefe6de121cf7f63eecadc89e5bfbbf079a24c752cc
-/accounts/target/jib-cache/selectors/5cef3614f251a17cc4501e85831e901e88d005f016c571a6dbaf7be1df20ebb9
-/loans/target/jib-cache/selectors/8f3acd1f0c4b5239ed27ba7e5539f201aff7ad516f2a9243d07b14b5aeac2888
-/loans/target/jib-cache/layers/b614dc44a4e7b6c1e3072c17a2adce10a7de9bfaab3ded69fed5023aae55cf4e/9ca0b1f417a8fe11b140b9e3bc38c5c90090712f7afb595c2dd1be41f5a64468
-/loans/target/jib-cache/layers/9ed73a378c2c440044465f3f076ef7fa044481e0470bf948695cf33fd0c929ef/32f36656d886597c559458d9885912bc00d929559cb3d09ea6ad46713716c5f1
-/accounts/target/jib-cache/selectors/c8ec290e6145dcbacfbbdf9be4c9bb3601cf6c2a6decac7b4d36f9c335509730
-/accounts/target/jib-cache/layers/aa0bbe1eda0a9ceea5922258279006b698834b6589f5be779c36c6ce47f91e10/cd7850fbce677eec1f628487906fc43a74d3114e42475b42abdc96df55238371
-/loans/target/jib-cache/selectors/d057be8112edfd1f4956d56ce3ad8d534ffe94cccc41d801027bbb3a98828734
+
+# Maven
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# JIB cache - ignore all jib-cache directories and files
+**/jib-cache/
+**/jib-image.*
+
+# Docker compose data
+docker-compose/**/.data/
+**/minio/
+**/.minio.sys/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Maven wrapper (optional - uncomment if you don't want to track them)
+# **/mvnw
+# **/mvnw.cmd
+# **/.mvn/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Environment files
+.env
+.env.local
