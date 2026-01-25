@@ -43,9 +43,9 @@ ehthumbs.db
 Thumbs.db
 
 # Maven wrapper (optional - uncomment if you don't want to track them)
-# **/mvnw
-# **/mvnw.cmd
-# **/.mvn/
+**/mvnw
+**/mvnw.cmd
+**/.mvn/
 
 # Temporary files
 *.tmp
@@ -56,3 +56,6 @@ Thumbs.db
 # Environment files
 .env
 .env.local
+
+# Git ignore file itself
+.gitignore
