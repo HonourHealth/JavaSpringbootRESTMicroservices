@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `accounts`
 (
     200
 ) NOT NULL,
+    `communication_sw` BOOLEAN,
     `created_at` date NOT NULL,
     `created_by` varchar
 (
