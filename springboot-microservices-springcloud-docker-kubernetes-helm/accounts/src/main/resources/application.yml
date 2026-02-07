@@ -25,14 +25,64 @@ spring:
       circuitbreaker:
         enabled: true
     function:
-      definition: updateCommunication
+      definition: updateCommunication;updateCommunicationRabbit
     stream:
+      default-binder: kafka
+      binders:
+        kafka:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers:
+                        - localhost:9092
+                      auto-create-topics: true
+        rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
       bindings:
         updateCommunication-in-0:
           destination: communication-sent
           group: ${spring.application.name}
+          binder: kafka
+          consumer:
+            max-attempts: 3
+            back-off-initial-interval: 1000
         sendCommunication-out-0:
           destination: send-communication
+          binder: kafka
+        updateCommunicationRabbit-in-0:
+          destination: communication-sent-rabbit
+          group: ${spring.application.name}
+          binder: rabbit
+        sendCommunicationRabbit-out-0:
+          destination: send-communication-rabbit
+          binder: rabbit
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+          auto-create-topics: true
+        bindings:
+          updateCommunication-in-0:
+            consumer:
+              configuration:
+                enable.auto.commit: false
+                auto.offset.reset: earliest
+          sendCommunication-out-0:
+            producer:
+              configuration:
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
   rabbitmq:
     host: localhost
     port: 5672

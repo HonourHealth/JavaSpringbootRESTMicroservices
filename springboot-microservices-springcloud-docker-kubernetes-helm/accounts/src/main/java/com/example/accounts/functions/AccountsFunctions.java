@@ -21,4 +21,12 @@ public class AccountsFunctions {
         };
     }
 
+    @Bean
+    public Consumer<Long> updateCommunicationRabbit(IAccountsService accountsService) {
+        return accountNumber -> {
+            log.info("Updating Communication status from RabbitMQ for the account number : " + accountNumber.toString());
+            accountsService.updateCommunicationStatus(accountNumber);
+        };
+    }
+
 }

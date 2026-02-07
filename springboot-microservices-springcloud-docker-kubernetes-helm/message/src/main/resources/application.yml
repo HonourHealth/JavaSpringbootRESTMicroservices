@@ -6,14 +6,50 @@ spring:
     name: "message"
   cloud:
     function:
-      definition: email|sms
+      definition: email|sms;emailRabbit|smsRabbit
     stream:
+      default-binder: kafka
+      binders:
+        kafka:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers:
+                        - localhost:9092
+                      auto-create-topics: true
+        rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
       bindings:
         emailsms-in-0:
           destination: send-communication
           group: ${spring.application.name}
+          binder: kafka
         emailsms-out-0:
           destination: communication-sent
+          binder: kafka
+        emailRabbitsmsRabbit-in-0:
+          destination: send-communication-rabbit
+          group: ${spring.application.name}
+          binder: rabbit
+        emailRabbitsmsRabbit-out-0:
+          destination: communication-sent-rabbit
+          binder: rabbit
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+          auto-create-topics: true
   rabbitmq:
     host: localhost
     port: 5672

@@ -16,7 +16,7 @@ public class MessageFunctions {
     @Bean
     public Function<AccountsMsgDto, AccountsMsgDto> email() {
         return accountsMsgDto -> {
-            log.info("Sending email with the details : {}", accountsMsgDto.toString());
+            log.info("Sending email with the details: {}", accountsMsgDto.toString());
             return accountsMsgDto;
         };
     }
@@ -24,9 +24,19 @@ public class MessageFunctions {
     @Bean
     public Function<AccountsMsgDto, Long> sms() {
         return accountsMsgDto -> {
-            log.info("Sending sms with the details : {}", accountsMsgDto.toString());
+            log.info("Sending sms with the details: {}", accountsMsgDto.toString());
             return accountsMsgDto.accountNumber();
         };
     }
-    
+
+    @Bean
+    public Function<AccountsMsgDto, AccountsMsgDto> emailRabbit() {
+        return email();
+    }
+
+    @Bean
+    public Function<AccountsMsgDto, Long> smsRabbit() {
+        return sms();
+    }
+
 }
