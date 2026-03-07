@@ -23,5 +23,5 @@ dependencies:
 - name: message
   repository: file://../../bank-services/message
   version: 0.1.0
-digest: sha256:d9aec855311f72286a711322734358fd90d61e7ab0e8ef80dea05b637e020544
-generated: "2023-09-01T12:06:31.531688+05:30"
+digest: sha256:3b35bc06f5c72217fb9540e4742340cfcfa294ed22b67e60d21fef4b194bd1a9
+generated: "2026-03-03T13:12:36.0114221+03:00"
