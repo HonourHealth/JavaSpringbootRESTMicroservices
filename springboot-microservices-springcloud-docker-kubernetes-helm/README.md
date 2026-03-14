@@ -7,6 +7,7 @@ This project demonstrates a comprehensive microservices architecture using Sprin
 - [Prerequisites](#prerequisites)
 - [Microservices](#microservices)
 - [Messaging (Kafka + RabbitMQ Together)](#messaging-kafka--rabbitmq-together)
+- [Resilience and Design Patterns](#resilience-and-design-patterns)
 - [Getting Started](#getting-started)
   - [Build Instructions](#build-instructions)
   - [Running with Docker Compose](#running-with-docker-compose)
@@ -86,6 +87,28 @@ Code and configuration references:
 Notes:
 - Both services set stream binders for `kafka` and `rabbit` in `application.yml`.
 - `default-binder` is `kafka`, and RabbitMQ flows are still active because Rabbit bindings are explicitly set with `binder: rabbit`.
+
+## Resilience and Design Patterns
+
+The codebase uses several resilience and distributed-system patterns in combination:
+
+| Pattern | How it is used in this project | Main references |
+|---|---|---|
+| Circuit Breaker (Gateway) | Gateway route for Accounts uses circuit breaker with fallback URI. | `gatewayserver/src/main/java/com/example/gatewayserver/GatewayserverApplication.java`, `gatewayserver/src/main/java/com/example/gatewayserver/controller/FallbackController.java` |
+| Time Limiter | Resilience4j time limiter is configured in gateway circuit breaker customization. | `gatewayserver/src/main/java/com/example/gatewayserver/GatewayserverApplication.java` |
+| Retry | Retry is applied at controller level (`getBuildInfo`) and on Loans gateway route. | `accounts/src/main/java/com/example/accounts/controller/AccountsController.java`, `gatewayserver/src/main/java/com/example/gatewayserver/GatewayserverApplication.java` |
+| Rate Limiter | Rate limiter is applied at controller level (`getJavaVersion`) and gateway route level for Cards using Redis. | `accounts/src/main/java/com/example/accounts/controller/AccountsController.java`, `gatewayserver/src/main/java/com/example/gatewayserver/GatewayserverApplication.java`, `gatewayserver/src/main/resources/application.yml` |
+| Fallback | Gateway fallback endpoint (`/contactSupport`) and OpenFeign fallback classes for Loans/Cards are present. | `gatewayserver/src/main/java/com/example/gatewayserver/controller/FallbackController.java`, `accounts/src/main/java/com/example/accounts/service/client/LoansFallback.java`, `accounts/src/main/java/com/example/accounts/service/client/CardsFallback.java` |
+| OpenFeign + Client-side resilience | Accounts calls Loans/Cards through Feign clients with fallback classes, with Feign circuit breaker enabled via config. | `accounts/src/main/java/com/example/accounts/service/client/LoansFeignClient.java`, `accounts/src/main/java/com/example/accounts/service/client/CardsFeignClient.java`, `accounts/src/main/resources/application.yml` |
+| Service Discovery | Services register to Eureka and Gateway routes with `lb://` logical service names. | `eurekaserver/src/main/java/com/example/eurekaserver/EurekaserverApplication.java`, `gatewayserver/src/main/java/com/example/gatewayserver/GatewayserverApplication.java` |
+| Externalized Configuration | Config Server centralizes configuration and services import config via `spring.config.import`. | `configserver/src/main/java/com/example/configserver/ConfigserverApplication.java`, `accounts/src/main/resources/application.yml`, `gatewayserver/src/main/resources/application.yml` |
+| Event-driven messaging | Accounts and Message services communicate asynchronously over Kafka and RabbitMQ with function bindings and `StreamBridge`. | `accounts/src/main/resources/application.yml`, `message/src/main/resources/application.yml`, `accounts/src/main/java/com/example/accounts/service/impl/AccountsServiceImpl.java` |
+
+### Important implementation notes
+
+- Feign fallbacks currently return `null` responses; these classes exist but can be improved with meaningful fallback payloads.
+- `resilience4j` base configs are declared in `accounts/src/main/resources/application.yml` and `gatewayserver/src/main/resources/application.yml`.
+- No explicit Bulkhead annotation/configuration was found in service code at the moment.
 
 ## Getting Started
 
