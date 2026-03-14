@@ -18,6 +18,8 @@ A production-style banking microservices platform built with Spring Boot and Spr
 - Core domain services for Accounts, Cards, and Loans
 - Platform services including Config Server, Eureka Server, and API Gateway
 - Dual messaging setup with Kafka and RabbitMQ for event-driven communication
+- Resilience patterns with circuit breaker, retry, rate limiter, and time limiter at gateway and service layers
+- OpenFeign client-side resilience with fallback handlers for Loans and Cards integrations
 - Security and identity integration with Keycloak
 - Deployment support across Docker Compose, Kubernetes manifests, and Helm charts
 - Observability stack with Grafana, Prometheus, Loki, and Tempo
