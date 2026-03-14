@@ -13,6 +13,15 @@ A comprehensive microservices-based architecture that consists of multiple servi
 - Resilience4j for circuit breaking and retry mechanisms
 - Distributed tracing with Micrometer and Zipkin
 
+### springboot-microservices-springcloud-docker-kubernetes-helm
+A production-style banking microservices platform built with Spring Boot and Spring Cloud, designed for containerized and cloud-native deployment:
+- Core domain services for Accounts, Cards, and Loans
+- Platform services including Config Server, Eureka Server, and API Gateway
+- Dual messaging setup with Kafka and RabbitMQ for event-driven communication
+- Security and identity integration with Keycloak
+- Deployment support across Docker Compose, Kubernetes manifests, and Helm charts
+- Observability stack with Grafana, Prometheus, Loki, and Tempo
+
 ### springboot-grpc-microservices
 A trading platform demonstrating gRPC-based microservices communication with Spring Boot:
 - User Service: Manages user accounts, portfolios, and trading operations
